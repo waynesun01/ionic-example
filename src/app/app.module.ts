@@ -27,7 +27,9 @@ import { ComponentsModule } from '../components/components.module'; //
     BrowserModule,
     HttpModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages:false
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

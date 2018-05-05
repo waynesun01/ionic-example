@@ -22,3 +22,31 @@
     <img src="{{img}}" alt="">
   </div>
 </ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-buttons>
+            <button ion-button outline (click)="chat()">
+              <ion-icon name="headset"></ion-icon>
+            </button>
+            <button ion-button clear (click)="cart()">
+              <ion-icon name="cart"></ion-icon>
+            </button>
+            <button ion-button clear (click)="zan()">
+              <ion-icon name="star-outline"></ion-icon>
+            </button>
+            <button ion-button clear (click)="addToCart()">
+              <ion-icon ios="ios-funnel" md="md-funnel"></ion-icon> Add To Cart
+            </button>
+            <button ion-button clear (click)="buyNow()">
+              <ion-icon name="menu"></ion-icon>Buy Now
+            </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+
+</ion-footer>
