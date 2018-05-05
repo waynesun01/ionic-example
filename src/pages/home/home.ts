@@ -7,37 +7,57 @@ import { AppService, AppGlobal } from '../../app/app.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  spinner1:boolean=true;
-
   slides: Array<any> = [];
-  slidesUrl:string=AppGlobal.API.getProducts;
+  categories: Array<any> = [];
+  products: Array<any> = [];
 
-  constructor(public AppService: AppService, public navCtrl: NavController) {
+  spinner1: boolean = true;
+
+  params = {
+    favoritesId: 2054400,
+    pageNo: 1,
+    pageSize: 20
+  }
+
+  constructor(public appService: AppService, public navCtrl: NavController) {
     this.getSlides();
-
+    this.getCategories();
+    this.getProducts();
   }
+  //获取幻灯片
   getSlides() {
-    // this.AppService.httpGet(AppGlobal.API.getProducts, {}, rs => {
-    //   console.debug(rs);
-    // }, true);
-    this.spinner1=false;
-    this.slides=[
-      {
-        "PicUrl":"http://nq.c.glsbt.com/attachment/images/10/2018/03/c4oUzurpkjDtbpU0V1JU9D8RZR0L4U.png",
-        "Link":"",
-        "Title":'AAA'
-      },
-      {
-        "PicUrl":"http://www.holdpanzer.com/attachment/images/10/2018/05/BmN6Lr0vU6afaAV060Ns0z606ZZIM0.png",
-        "Link":"",
-        "Title":'VVV'
-      },
-    ];
-
+    var params = {
+      favoritesId: 2056439,
+      pageNo: 1,
+      pageSize: 5
+    }
+    this.appService.httpGet(AppGlobal.API.getProducts, params, rs => {
+      console.debug(rs);
+      this.slides = rs.data;
+      this.spinner1 = false;
+    })
+  }
+  //获取分类
+  getCategories() {
+    this.appService.httpGet(AppGlobal.API.getCategories, { appTag: 'dress' }, rs => {
+      console.debug(rs);
+      this.categories = rs.data;
+    })
+  }
+  //获取首页推荐列表
+  getProducts() {
+    this.appService.httpGet(AppGlobal.API.getProducts, this.params, rs => {
+      console.debug(rs);
+      this.products = rs.data;
+    })
+  }
+  //商品详情
+  goDetails(item) {
+    console.debug('go details...')
   }
 
-  goDetails(item){
-
+  goProductList(item){
+    this.navCtrl.push('ProductListPage', { item: item });
   }
 
 }
